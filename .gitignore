@@ -2,3 +2,10 @@ pkg/
 api.key
 .api.key.trimmed
 *-handin.tar.gz
+
+node_modules
+package.json
+package-lock.json
+
+### MacOS ###
+**/.DS_Store
