@@ -31,6 +31,14 @@ type Task struct {
 	NReduce   int      // Number of Reduce tasks
 }
 
+func NewReduceeTask(id int, inputFile []string) *Task {
+	return &Task{
+		ID:        id,
+		Type:      ReduceTask,
+		InputFile: inputFile,
+	}
+}
+
 // NewMapTask creates a new Map task.
 func NewMapTask(id int, inputFile []string, nReduce int) *Task {
 	return &Task{
@@ -38,14 +46,6 @@ func NewMapTask(id int, inputFile []string, nReduce int) *Task {
 		Type:      MapTask,
 		InputFile: inputFile,
 		NReduce:   nReduce,
-	}
-}
-
-// NewReduceTask creates a new Reduce task.
-func NewReduceTask(id int) *Task {
-	return &Task{
-		ID:   id,
-		Type: ReduceTask,
 	}
 }
 
@@ -79,7 +79,7 @@ func (ts *TaskSet) RegisterTask(task *Task) {
 	case MapTask:
 		ts.mapTask[task.ID] = NewTaskMetaData(task)
 	case ReduceTask:
-		ts.mapTask[task.ID] = NewTaskMetaData(task)
+		ts.reduceTask[task.ID] = NewTaskMetaData(task)
 	default:
 		log.Fatalf("Cannot add unsupported task to TaskSet.")
 	}

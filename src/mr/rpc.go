@@ -8,6 +8,7 @@ package mr
 
 import "os"
 import "strconv"
+import "github.com/google/uuid"
 
 //
 // example to show how to declare the arguments
@@ -24,6 +25,27 @@ type ExampleReply struct {
 
 // Add your RPC definitions here.
 
+type FetchTaskArgs struct {
+	Msg    string
+	NodeId uuid.UUID
+}
+
+type FetchTaskReply struct {
+	Msg    string
+	NodeId uuid.UUID
+	Task   *Task
+}
+
+type SubmitTaskArgs struct {
+	Msg    string
+	NodeId uuid.UUID
+	Task   *Task
+}
+
+type SubmitTaskReply struct {
+	Msg    string
+	NodeId uuid.UUID
+}
 
 // Cook up a unique-ish UNIX-domain socket name
 // in /var/tmp, for the coordinator.
